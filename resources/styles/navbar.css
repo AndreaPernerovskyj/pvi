@@ -1,0 +1,23 @@
+.navbar a {
+    width: auto;
+    height: auto;
+    padding: 10px 10px 10px 25px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: all ease-in-out 0.1s;
+    color: #4a4a4a;
+    border-radius: 3px;
+}
+
+.navbar a:hover {
+    cursor: pointer;
+    background: #e0e0e0;
+    color: #1e1e1e;
+}
+
+.navbar a.active {
+    background: #d6d6d6;
+    color: #1e1e1e;
+    font-weight: bold;
+}

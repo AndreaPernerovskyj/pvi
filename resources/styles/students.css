@@ -1,0 +1,213 @@
+.table-container {
+    height: 400px;
+    min-height: 50%;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.students-table {
+    text-align: center;
+    width: 100%;
+}
+
+.students-table th {
+    background: #424242;
+    color: #f0f0f0;
+    height: 40px;
+}
+
+.students-table td {
+    height: 40px;
+    color: #424242;
+}
+
+.students-intro {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    color: #333333;
+}
+
+.add-students-btn {
+    background: #6d6d6d;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.add-students-btn:hover {
+    transform: scale(1.05);
+    background: #424242;
+}
+
+.options-td button {
+    font-size: 16px;
+    padding: 5px;
+    border: 1.5px solid #6d6d6d;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: #424242;
+    transition: all 0.2s ease;
+}
+
+.options-td button:last-child {
+    margin-right: 0;
+}
+
+.options-td button:hover {
+    background: #333333;
+    color: #ffffff;
+}
+
+/* Styles for the modal window of adding a new student */
+
+.add-student-modal-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.add-student-modal-container.show {
+    display: flex;
+}
+
+.add-student-modal-container .modal {
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 30px 50px;
+    width: 600px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.add-student-modal-container .modal h3 {
+    text-align: left;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.create-student-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.add-student-modal-container .modal label {
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.add-student-modal-container .modal input,
+.add-student-modal-container .modal select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    width: 100%;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.add-student-modal-container .modal input:focus,
+.add-student-modal-container .modal select:focus {
+    border-color: #424242;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.add-student-modal-container .modal .form-buttons button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-close-btn {
+    background-color: #424242;
+    color: #ffffff;
+}
+
+.modal-close-btn:hover {
+    background-color: #333333;
+}
+
+.submit-modal-form-btn {
+    background-color: #6d6d6d;
+    color: #ffffff;
+}
+
+.create-student-btn:hover {
+    background-color: #424242;
+}
+
+/*Should delete user modal*/
+
+.should-delete-student-modal {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.should-delete-student-modal.show {
+    display: flex;
+}
+
+.should-delete-student-modal .modal {
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 30px 50px;
+    width: 600px;
+    max-width: 90%;
+    text-align: center;
+}
+.should-delete-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.should-delete-yes,
+.should-delete-no {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.should-delete-yes:hover {
+    background-color: #e63946;
+}
+
+.should-delete-no:hover {
+    background-color: #4caf50;
+}

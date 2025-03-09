@@ -1,0 +1,8 @@
+.content  * {
+    width: auto;
+    height: auto;
+}
+
+.content {
+    padding: 30px;
+}
