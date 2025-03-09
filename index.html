@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="resources/styles/index.css" rel="stylesheet"/>
+    <link href="./resources/styles/navbar.css" rel="stylesheet"/>
+    <link href="./resources/styles/header.css" rel="stylesheet"/>
+    <link href="./resources/styles/common.css" rel="stylesheet"/>
+    <link href="./resources/styles/main.css" rel="stylesheet"/>
+    <link href="./resources/styles/students.css" rel="stylesheet"/>
+    <link href="resources/styles/responsive.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS</title>
+</head>
+<body>
+<div class="root">
+    <header class="header">
+        <div class="header-title">
+            <h1 id="header-title" tabindex="0" aria-label="Website title"
+                data-content="./resources/pages/students.html">CMS</h1>
+        </div>
+
+        <div class="header-user-related">
+            <div class="bell-notifications">
+                <div tabindex="0" aria-label="New notifications" aria-haspopup="true">
+                    <i class="fa-regular fa-bell icon_size animation"></i>
+                </div>
+                <div class="dot"></div>
+
+                <div class="notifications-popup" tabindex="0" aria-label="Notification list">
+                    <div class="notification-item" data-content="./resources/pages/messages.html" role="button"
+                         aria-label="Open notification" tabindex="0">
+                        <i class="fa-solid fa-user icon_size avatar"></i>
+                        <div class="notification-content">
+                            <span class="notification-user-name">John Doe</span>
+                            <p class="notification-message">This is the first message...</p>
+                        </div>
+                    </div>
+                    <div class="notification-item" data-content="./resources/pages/messages.html" role="button"
+                         aria-label="Open notification" tabindex="0">
+                        <i class="fa-solid fa-user icon_size avatar"></i>
+                        <div class="notification-content">
+                            <span class="notification-user-name">Jane Smith</span>
+                            <p class="notification-message">Another notification...</p>
+                        </div>
+                    </div>
+                    <div class="notification-item" data-content="./resources/pages/messages.html" role="button"
+                         aria-label="Open notification" tabindex="0">
+                        <i class="fa-solid fa-user icon_size avatar"></i>
+                        <div class="notification-content">
+                            <span class="notification-user-name">Alice Brown</span>
+                            <p class="notification-message">Yet another message...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-name">
+                <div class="user-info" data-content="/resources/pages/profile.html" aria-label="User name" tabindex="0"
+                     aria-haspopup="true">
+                    <i class="fa-solid fa-user icon_size"></i>
+                    <a href="#" tabindex="-1">Andrea Pernerovskyi</a>
+                </div>
+
+                <div class="user-popup" tabindex="0" aria-label="User popup">
+                    <button aria-label="Go to profile page">Profile</button>
+                    <button aria-label="Log out from the website">Log out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="#" data-content="./resources/pages/dashboard.html">DashBoard</a>
+        <a class="students-navbar active" href="#" data-content="./resources/pages/students.html">Students</a>
+        <a href="#" data-content="./resources/pages/tasks.html">Tasks</a>
+    </nav>
+
+    <main class="content">
+
+    </main>
+</div>
+
+<script src="resources/logic/jquery-3.7.1.js"></script>
+
+<script src="resources/logic/app.js"></script>
+<script src="resources/logic/modals.js"></script>
+<script src="resources/logic/state.js"></script>
+<script src="https://kit.fontawesome.com/12f39570aa.js" crossorigin="anonymous"></script>
+</body>
+</html>
