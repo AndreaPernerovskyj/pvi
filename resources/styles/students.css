@@ -22,6 +22,27 @@
     color: #424242;
 }
 
+.student-status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.student-status {
+    width: 22px;
+    height: 22px;
+    background-color: gray;
+    border: 2px solid #333;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.student-status.online {
+    background-color: #28a745;
+    border-color: #1e7e34;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
+}
+
 .students-intro {
     display: flex;
     justify-content: space-between;

@@ -61,10 +61,20 @@ function create_new_row(student_data) {
     td_checkbox.append(input);
     tr.append(td_checkbox);
 
-    ['group', 'name', 'gender', 'birthday', 'status'].forEach(property => {
+    ['group', 'name', 'gender', 'birthday'].forEach(property => {
         const td = $("<td></td>").text(student_data[property])
         tr.append(td);
     })
+    const circle_container = $("<div></div>").addClass("student-status-container")
+    const circle = $("<div></div>");
+    circle.addClass("student-status")
+    if(student_data['status'].toLowerCase() === "online") {
+        circle.addClass("online");
+    }
+    const td_status = $("<td></td>").addClass("status-cell")
+    circle_container.append(circle)
+    td_status.append(circle_container)
+    tr.append(td_status);
 
     const td_options = $("<td></td>").addClass("options-td");
 
