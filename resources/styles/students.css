@@ -43,6 +43,25 @@
     background: #424242;
 }
 
+.students-main-button {
+    display: flex;
+    gap:40px;
+}
+
+.delete-selected-btn {
+    display: none;
+    font-size: 16px;
+    padding: 5px;
+    border: 1.5px solid #6d6d6d;
+    border-radius: 5px;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+}
+
+.delete-selected-btn:hover {
+    transform: scale(1.1);
+}
+
 .options-td button {
     font-size: 16px;
     padding: 5px;
@@ -60,6 +79,13 @@
 .options-td button:hover {
     background: #333333;
     color: #ffffff;
+}
+
+.options-td button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 /* Styles for the modal window of adding a new student */
@@ -92,8 +118,6 @@
 
 .add-student-modal-container .modal h3 {
     text-align: left;
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
 }
 
 .create-student-form {
@@ -184,6 +208,7 @@
     width: 600px;
     max-width: 90%;
     text-align: center;
+    position: relative;
 }
 .should-delete-text {
     font-size: 18px;
@@ -210,4 +235,82 @@
 
 .should-delete-no:hover {
     background-color: #4caf50;
+}
+
+.modal-exit-delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border:none;
+}
+
+.modal-exit-delete-btn i {
+    font-size:18px;
+    color: #424242;
+}
+
+.modal-exit-delete-btn i:hover {
+    transform: scale(1.2);
+}
+
+/*==========*/
+
+.modal-header {
+    display:flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.modal-exit-btn {
+    background-color: transparent;
+    margin-bottom: 2px;
+    border:none;
+}
+
+.modal-exit-btn i {
+    font-size:18px;
+    color: #424242;
+}
+
+.modal-exit-btn i:hover {
+    transform: scale(1.2);
+}
+
+/* === Pagination === */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.pagination-btn {
+    padding: 10px 14px;
+    border: none;
+    background: #424242;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.pagination-btn:hover {
+    background: #3e3b3b;
+    transform: scale(1.05);
+}
+
+.pagination-btn.active {
+    background: #1e1e1e;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.pagination-btn:disabled {
+    background: #b0b0b0;
+    cursor: not-allowed;
 }

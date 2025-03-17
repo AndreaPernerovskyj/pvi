@@ -4,16 +4,21 @@
             <h1 tabindex="0">Students</h1>
         </div>
 
-        <button type="button" class="add-students-btn">
-            <i class="fa-solid fa-plus"></i>
-        </button>
+        <div class="students-main-button">
+            <button type="button" class="delete-selected-btn">Delete selected</button>
+
+            <button type="button" class="add-students-btn">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+        </div>
     </div>
 
     <div class="table-container" tabindex="0" aria-label="Students table info">
         <table class="students-table">
             <tbody class="students-table-body">
             <tr>
-                <th><input type="checkbox"/></th>
+                <th><input type="checkbox" class="main-checkbox"/></th>
                 <th>Group</th>
                 <th>Name</th>
                 <th>Gender</th>
@@ -25,9 +30,27 @@
         </table>
     </div>
 
+    <div class="pagination-container">
+        <button class="pagination-btn prev" disabled>&laquo; Prev</button>
+        <div class="pagination-pages">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+        </div>
+        <button class="pagination-btn next">Next &raquo;</button>
+    </div>
+
     <div class="add-student-modal-container" tabindex="0">
         <div class="modal">
-            <h3 class="add-edit-modal-header" tabindex="0">Add Students</h3>
+            <div class="modal-header">
+                <h3 class="add-edit-modal-header" tabindex="0">Add Students</h3>
+                <button class="modal-exit-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
             <form class="create-student-form">
                 <label for="group">Group:</label>
                 <select id="group" name="group">
@@ -64,6 +87,10 @@
 
     <div class="should-delete-student-modal">
         <div class="modal">
+            <button class="modal-exit-delete-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
             <div class="should-delete-text" tabindex="0"></div>
             <button class="should-delete-yes">Yes</button>
             <button class="should-delete-no">No</button>

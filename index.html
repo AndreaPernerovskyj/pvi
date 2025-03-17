@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="resources/styles/index.css" rel="stylesheet"/>
-    <link href="./resources/styles/navbar.css" rel="stylesheet"/>
-    <link href="./resources/styles/header.css" rel="stylesheet"/>
-    <link href="./resources/styles/common.css" rel="stylesheet"/>
-    <link href="./resources/styles/main.css" rel="stylesheet"/>
-    <link href="./resources/styles/students.css" rel="stylesheet"/>
-    <link href="resources/styles/responsive.css" rel="stylesheet"/>
+    <link href="resources/styles/index.css" rel="stylesheet">
+    <link href="./resources/styles/navbar.css" rel="stylesheet">
+    <link href="./resources/styles/header.css" rel="stylesheet">
+    <link href="./resources/styles/common.css" rel="stylesheet">
+    <link href="./resources/styles/main.css" rel="stylesheet">
+    <link href="./resources/styles/students.css" rel="stylesheet">
+    <link href="resources/styles/responsive.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMS</title>
 </head>
@@ -22,36 +22,12 @@
 
         <div class="header-user-related">
             <div class="bell-notifications">
-                <div tabindex="0" aria-label="New notifications" aria-haspopup="true">
-                    <i class="fa-regular fa-bell icon_size animation"></i>
+                <div tabindex="0" aria-label="New notifications" aria-haspopup="true" role="button">
+                    <i class="fa-regular fa-bell icon_size" id="notification-bell"></i>
                 </div>
-                <div class="dot"></div>
+                <div class="" id="notification-bell-dot"></div>
 
                 <div class="notifications-popup" tabindex="0" aria-label="Notification list">
-                    <div class="notification-item" data-content="./resources/pages/messages.html" role="button"
-                         aria-label="Open notification" tabindex="0">
-                        <i class="fa-solid fa-user icon_size avatar"></i>
-                        <div class="notification-content">
-                            <span class="notification-user-name">John Doe</span>
-                            <p class="notification-message">This is the first message...</p>
-                        </div>
-                    </div>
-                    <div class="notification-item" data-content="./resources/pages/messages.html" role="button"
-                         aria-label="Open notification" tabindex="0">
-                        <i class="fa-solid fa-user icon_size avatar"></i>
-                        <div class="notification-content">
-                            <span class="notification-user-name">Jane Smith</span>
-                            <p class="notification-message">Another notification...</p>
-                        </div>
-                    </div>
-                    <div class="notification-item" data-content="./resources/pages/messages.html" role="button"
-                         aria-label="Open notification" tabindex="0">
-                        <i class="fa-solid fa-user icon_size avatar"></i>
-                        <div class="notification-content">
-                            <span class="notification-user-name">Alice Brown</span>
-                            <p class="notification-message">Yet another message...</p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="user-name">

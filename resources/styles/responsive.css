@@ -91,6 +91,17 @@
         font-size: 16px;
         padding: 6px;
     }
+
+    /*Pagination*/
+    .pagination-container {
+        gap: 4px;
+    }
+
+    .pagination-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -109,6 +120,16 @@
     .options-td button {
         font-size: 11px;
         padding: 2px;
+    }
+
+    .pagination-container {
+        gap: 3px;
+    }
+
+    .pagination-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        border-radius: 5px;
     }
 }
 
@@ -133,6 +154,16 @@
     .should-delete-yes, .should-delete-no {
         margin: 0 3px;
         padding: 6px 12px;
+    }
+
+    .pagination-container {
+        gap: 2px;
+    }
+
+    .pagination-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+        border-radius: 4px;
     }
 }
 

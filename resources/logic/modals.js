@@ -1,10 +1,15 @@
 // For adding a new student
-
 function add_students_modal() {
+    const createStudentForm = $(".create-student-form");
+
+    $(".modal-exit-btn").off("click").on("click", (e) => {
+        e.preventDefault();
+        createStudentForm[0].reset();
+        $(".add-student-modal-container").removeClass("show");
+    })
     $(".modal-close-btn").off("click").on("click", e => {
         e.preventDefault();
 
-        const createStudentForm = $(".create-student-form");
         const isEmpty = createStudentForm.find("input").toArray().some(input => !input.value.trim());
 
         if (!isEmpty) {
@@ -15,7 +20,7 @@ function add_students_modal() {
         $(".add-student-modal-container").removeClass("show");
     })
 
-    $(".create-student-form").off("submit").on("submit", create_student);
+    createStudentForm.off("submit").on("submit", create_student);
 }
 
 function create_student(e) {
@@ -45,7 +50,13 @@ function create_new_row(student_data) {
     const tr = $("<tr></tr>");
     tr.attr("id", student_data.id);
     const td_checkbox = $("<td></td>");
-    const input = $("<input />", {type: "checkbox"})
+    const input = $("<input />", {type: "checkbox"}).addClass("student-checkbox")
+    if(document.querySelector(".main-checkbox").checked)
+    {
+        input.prop("checked", true);
+    }
+    else
+        input.prop("checked", false);
 
     td_checkbox.append(input);
     tr.append(td_checkbox);
@@ -57,7 +68,7 @@ function create_new_row(student_data) {
 
     const td_options = $("<td></td>").addClass("options-td");
 
-    const button_edit = $("<button></button>").addClass("edit_btn").click(e => {
+    const button_edit = $("<button></button>").prop("disabled", true).addClass("edit_btn").click(e => {
         edit_student_modal(e);
     })
 
@@ -66,7 +77,7 @@ function create_new_row(student_data) {
         .append(i_pencil)
         .attr("aria-label", "Edit student" + student_data.name);
 
-    const button_trash = $("<button></button>").addClass("trash_btn").click((e) => {
+    const button_trash = $("<button></button>").prop("disabled", true).addClass("trash_btn").click((e) => {
         should_delete_student(e, student_data.name);
     })
 
@@ -78,15 +89,19 @@ function create_new_row(student_data) {
     td_options.append(button_edit, button_trash);
 
     tr.append(td_options);
+    input.change((e) => {
+        checkBoxChanged(e.target.closest("tr"), e.target.checked)
+    })
 
     studentsTableBody.append(tr);
 }
 
+// Deleting a student
 function should_delete_student(outer_e, name) {
     const shouldDeleteModal = $(".should-delete-student-modal");
+    const modalExitDeleteBtn = $(".modal-exit-delete-btn");
     shouldDeleteModal.addClass('show');
     $(".should-delete-text").focus().text(`Do you really want to delete ${name} student?`);
-
 
     const yesClickHandler = () => {
         delete_student(shouldDeleteModal[0], outer_e);
@@ -99,14 +114,16 @@ function should_delete_student(outer_e, name) {
     };
 
     const shouldDelete = $(".should-delete-yes");
-    const shouldNotDelete = $(".should-delete-no");nan
+    const shouldNotDelete = $(".should-delete-no");
 
     shouldDelete.on("click", yesClickHandler)
-    shouldNotDelete.click("click", noClickHandler)
+    shouldNotDelete.on("click", noClickHandler)
+    modalExitDeleteBtn.on("click", noClickHandler)
 
     function cleanup() {
         shouldDelete.off("click", yesClickHandler)
         shouldNotDelete.off("click", noClickHandler)
+        modalExitDeleteBtn.off("click", noClickHandler)
     }
 }
 
@@ -115,6 +132,9 @@ function delete_student(shouldDeleteModal, e) {
     td_element.remove();
     state.students = state.students.filter(student => student.id !== Number(td_element.id));
     shouldDeleteModal.classList.remove('show');
+
+    numberOfChecked--;
+    numberOfCheckedChanged();
 }
 
 // For editing a student
@@ -159,7 +179,12 @@ function edit_student_modal(event) {
         }
 
         createStudentForm[0].reset();
-        $(".add-edit-modal-header").text("Add Students");
+        $(".add-student-modal-container").removeClass("show");
+    })
+
+    $(".modal-exit-btn").off("click").on("click", (e) => {
+        e.preventDefault();
+        createStudentForm[0].reset();
         $(".add-student-modal-container").removeClass("show");
     })
 }
@@ -197,4 +222,46 @@ function edit_student_submit(student, e) {
     studentRow.find("td:nth-child(5)").text(studentData.birthday);
 
     createStudentForm.off("submit").on("submit", create_student);
+}
+
+
+// Helper functions
+
+let numberOfChecked=  0
+function checkBoxChanged(tr, shouldCheck) {
+    const options_td = tr.querySelector(".options-td");
+    const button_trash = options_td.querySelector(".trash_btn")
+    const button_edit = options_td.querySelector(".edit_btn")
+    const checkbox = tr.querySelector(".student-checkbox");
+
+    const mainCheckBox = document.querySelector(".main-checkbox");
+    if(shouldCheck) {
+        button_trash.disabled = false;
+        button_edit.disabled = false;
+        checkbox.checked = true;
+
+        numberOfChecked++;
+        if(numberOfChecked === state.students.length) {
+            mainCheckBox.checked = true;
+        }
+    }
+    else {
+        button_trash.disabled = true;
+        button_edit.disabled = true;
+        checkbox.checked = false;
+        mainCheckBox.checked = false;
+
+        numberOfChecked--;
+    }
+
+    numberOfCheckedChanged();
+}
+
+function numberOfCheckedChanged() {
+    if(numberOfChecked >= 2) {
+        document.querySelector(".delete-selected-btn").style.display = "block";
+    }
+    else {
+        document.querySelector(".delete-selected-btn").style.display = "none";
+    }
 }
