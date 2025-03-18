@@ -6,7 +6,7 @@ function add_students_modal() {
         e.preventDefault();
         createStudentForm[0].reset();
         $(".add-student-modal-container").removeClass("show");
-    })
+    });
     $(".modal-close-btn").off("click").on("click", e => {
         e.preventDefault();
 
@@ -18,7 +18,7 @@ function add_students_modal() {
 
         createStudentForm[0].reset();
         $(".add-student-modal-container").removeClass("show");
-    })
+    });
 
     createStudentForm.off("submit").on("submit", create_student);
 }
@@ -26,7 +26,7 @@ function add_students_modal() {
 function create_student(e) {
     e.preventDefault();
 
-    const createStudentForm = $(".create-student-form")
+    const createStudentForm = $(".create-student-form");
     const formData = new FormData(createStudentForm[0]);
     const studentData = {
         id: state.students.length,
@@ -50,8 +50,13 @@ function create_new_row(student_data) {
     const tr = $("<tr></tr>");
     tr.attr("id", student_data.id);
     const td_checkbox = $("<td></td>");
-    const input = $("<input />", {type: "checkbox"}).addClass("student-checkbox")
-    if(document.querySelector(".main-checkbox").checked)
+    const input = $("<input />", {
+        type: "checkbox",
+        "aria-label": `Select student ${student_data.name}`
+    }).addClass("student-checkbox");
+
+    let isChecked = document.querySelector(".main-checkbox").checked;
+    if(isChecked)
     {
         input.prop("checked", true);
     }
@@ -62,34 +67,34 @@ function create_new_row(student_data) {
     tr.append(td_checkbox);
 
     ['group', 'name', 'gender', 'birthday'].forEach(property => {
-        const td = $("<td></td>").text(student_data[property])
+        const td = $("<td></td>").text(student_data[property]);
         tr.append(td);
-    })
-    const circle_container = $("<div></div>").addClass("student-status-container")
+    });
+    const circle_container = $("<div></div>").addClass("student-status-container");
     const circle = $("<div></div>");
-    circle.addClass("student-status")
+    circle.addClass("student-status");
     if(student_data['status'].toLowerCase() === "online") {
         circle.addClass("online");
     }
-    const td_status = $("<td></td>").addClass("status-cell")
-    circle_container.append(circle)
-    td_status.append(circle_container)
+    const td_status = $("<td></td>").addClass("status-cell");
+    circle_container.append(circle);
+    td_status.append(circle_container);
     tr.append(td_status);
 
     const td_options = $("<td></td>").addClass("options-td");
 
-    const button_edit = $("<button></button>").prop("disabled", true).addClass("edit_btn").click(e => {
+    const button_edit = $("<button></button>").prop("disabled", !isChecked).addClass("edit_btn").click(e => {
         edit_student_modal(e);
-    })
+    });
 
-    const i_pencil = $("<i></i>").addClass('fa-solid fa-pencil')
+    const i_pencil = $("<i></i>").addClass('fa-solid fa-pencil');
     button_edit
         .append(i_pencil)
         .attr("aria-label", "Edit student" + student_data.name);
 
-    const button_trash = $("<button></button>").prop("disabled", true).addClass("trash_btn").click((e) => {
+    const button_trash = $("<button></button>").prop("disabled", !isChecked).addClass("trash_btn").click((e) => {
         should_delete_student(e, student_data.name);
-    })
+    });
 
     const i_trash = $("<i></i>").addClass('fa-solid fa-trash');
     button_trash
@@ -100,8 +105,8 @@ function create_new_row(student_data) {
 
     tr.append(td_options);
     input.change((e) => {
-        checkBoxChanged(e.target.closest("tr"), e.target.checked)
-    })
+        checkBoxChanged(e.target.closest("tr"), e.target.checked);
+    });
 
     studentsTableBody.append(tr);
 }
@@ -126,14 +131,14 @@ function should_delete_student(outer_e, name) {
     const shouldDelete = $(".should-delete-yes");
     const shouldNotDelete = $(".should-delete-no");
 
-    shouldDelete.on("click", yesClickHandler)
-    shouldNotDelete.on("click", noClickHandler)
-    modalExitDeleteBtn.on("click", noClickHandler)
+    shouldDelete.on("click", yesClickHandler);
+    shouldNotDelete.on("click", noClickHandler);
+    modalExitDeleteBtn.on("click", noClickHandler);
 
     function cleanup() {
-        shouldDelete.off("click", yesClickHandler)
-        shouldNotDelete.off("click", noClickHandler)
-        modalExitDeleteBtn.off("click", noClickHandler)
+        shouldDelete.off("click", yesClickHandler);
+        shouldNotDelete.off("click", noClickHandler);
+        modalExitDeleteBtn.off("click", noClickHandler);
     }
 }
 
@@ -167,7 +172,7 @@ function edit_student_modal(event) {
     $("#gender").val(student.gender);
     $("#birthday").val(student.birthday);
 
-    $(".submit-modal-form-btn").text("Submit")
+    $(".submit-modal-form-btn").text("Submit");
 
     $(".add-student-modal-container").addClass("show");
     add_edit_modal_header.focus();
@@ -176,7 +181,7 @@ function edit_student_modal(event) {
     createStudentForm.off("submit");
 
     createStudentForm.on("submit", (e) => {
-        edit_student_submit(student, e)
+        edit_student_submit(student, e);
     });
 
     $(".modal-close-btn").off("click").on("click", e => {
@@ -190,19 +195,19 @@ function edit_student_modal(event) {
 
         createStudentForm[0].reset();
         $(".add-student-modal-container").removeClass("show");
-    })
+    });
 
     $(".modal-exit-btn").off("click").on("click", (e) => {
         e.preventDefault();
         createStudentForm[0].reset();
         $(".add-student-modal-container").removeClass("show");
-    })
+    });
 }
 
 function edit_student_submit(student, e) {
     $(".add-edit-modal-header").text("Add Students");
 
-    e.preventDefault()
+    e.preventDefault();
     $(".add-student-modal-container").removeClass("show");
 
     const createStudentForm = $(".create-student-form");

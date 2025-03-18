@@ -4,22 +4,22 @@ const notification_popup = document.querySelector('.notifications-popup');
 const user_info = document.querySelector(".user-info");
 const header_title = document.getElementById("header-title");
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
     newNotificationsCheckUp();
 
-    header_title.addEventListener("click", () => {
+    header_title.addEventListener("click", function() {
         const url = header_title.dataset.content;
         loadContent(url);
         delete_all_active(navbar);
         document.querySelector(".students-navbar").classList.add('active');
     });
-    user_info.addEventListener("click", () => {
+    user_info.addEventListener("click", function() {
         delete_all_active(navbar);
         loadContent(user_info.dataset.content);
     });
 
     for (let item of navbar.children) {
-        item.addEventListener("click", () => {
+        item.addEventListener("click", function() {
             if (!item.classList.contains("active")) {
                 delete_all_active(navbar);
                 item.classList.add("active");
@@ -32,15 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const initialContent = navbar.querySelector(".active").dataset.content;
     loadContent(initialContent);
 
-    document.addEventListener("dblclick", () => {
+    document.addEventListener("dblclick", function() {
         if(notification_popup.querySelector("h3")) {
             notification_popup.innerHTML = '';
             newNotificationsBellAnimationStartUp();
         }
 
-        createNewNotificationItem({id: 10, userName:"P Diddy", message:"Good"})
-    })
-})
+        createNewNotificationItem({id: 10, userName:"P Diddy", message:"Good"});
+    });
+});
 
 
 async function loadContent(url)  {
@@ -116,13 +116,13 @@ async function newNotificationsCheckUp() {
         newNotificationsBellAnimationStartUp();
 
         state.notifications.map(notification => {
-            createNewNotificationItem(notification)
-        })
+            createNewNotificationItem(notification);
+        });
     }
     else {
         const h3 = document.createElement("h3");
         h3.innerText = "No messages yet";
-        notificationsPopup.append(h3)
+        notificationsPopup.append(h3);
     }
 }
 
@@ -130,31 +130,31 @@ function createNewNotificationItem(notificationInfo) {
     const notificationsPopup = document.querySelector(".notifications-popup");
 
     const newNotificationItem = document.createElement("div");
-    newNotificationItem.classList.add("notification-item")
+    newNotificationItem.classList.add("notification-item");
     newNotificationItem.dataset.content = "./resources/pages/messages.html";
-    newNotificationItem.ariaLabel = "Open notification"
+    newNotificationItem.ariaLabel = "Open notification";
     newNotificationItem.tabIndex = 0;
 
     const i = document.createElement("i");
-    i.classList.add("fa-solid", "fa-user", "icon_size", "avatar")
-    newNotificationItem.append(i)
+    i.classList.add("fa-solid", "fa-user", "icon_size", "avatar");
+    newNotificationItem.append(i);
 
-    const notificationContent = document.createElement("div")
-    notificationContent.classList.add("notification-content")
+    const notificationContent = document.createElement("div");
+    notificationContent.classList.add("notification-content");
 
-    const span = document.createElement("span")
-    span.classList.add("notification-user-name")
-    span.innerText = notificationInfo.userName
-    notificationContent.append(span)
+    const span = document.createElement("span");
+    span.classList.add("notification-user-name");
+    span.innerText = notificationInfo.userName;
+    notificationContent.append(span);
 
-    const p = document.createElement("p")
-    p.classList.add("notification-message")
-    p.innerText = notificationInfo.message
-    notificationContent.append(p)
+    const p = document.createElement("p");
+    p.classList.add("notification-message");
+    p.innerText = notificationInfo.message;
+    notificationContent.append(p);
 
-    newNotificationItem.append(notificationContent)
+    newNotificationItem.append(notificationContent);
 
-    newNotificationItem.addEventListener("click", () => {
+    newNotificationItem.addEventListener("click", function() {
         delete_all_active(navbar);
         const url = newNotificationItem.dataset.content;
         loadContent(url);

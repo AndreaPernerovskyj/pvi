@@ -1,4 +1,4 @@
-let state = {
+var state = {
     students: [
         {id: 0, group: "PZ-21", name: "Sofia Lesko", birthday: "2007-05-27", gender: "Female", status: "online"},
         {id: 1, group: "PZ-23", name: "Andrea Pernerovskyi", birthday: "2006-10-01", gender: "Male", status: "Offline"},
