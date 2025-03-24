@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
 async function loadContent(url)  {
     switch (url) {
         case "./resources/pages/students.html": {
