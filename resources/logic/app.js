@@ -4,13 +4,23 @@ const notification_popup = document.querySelector('.notifications-popup');
 const user_info = document.querySelector(".user-info");
 const header_title = document.getElementById("header-title");
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
+    if("serviceWorker" in navigator) {
+        try {
+            await navigator.serviceWorker.register("/sw.js")
+            console.log("Service worker register successful");
+        }
+        catch(e) {
+            console.log("Service worker register fail");
+        }
+    }
+
     newNotificationsCheckUp();
 
     header_title.addEventListener("click", function() {
         const url = header_title.dataset.content;
-        loadContent(url);
         delete_all_active(navbar);
+        loadContent(url);
         document.querySelector(".students-navbar").classList.add('active');
     });
     user_info.addEventListener("click", function() {
@@ -23,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!item.classList.contains("active")) {
                 delete_all_active(navbar);
                 item.classList.add("active");
+
                 const url = item.dataset.content;
                 loadContent(url);
             }
@@ -81,6 +92,7 @@ function loadStudentsPage(url) {
 
             const mainCheckBox = document.querySelector(".main-checkbox");
             mainCheckBox.addEventListener("change", (e) => {
+                numberOfChecked=0;
                 const table = e.target.closest("tbody");
                 for (let i = 1; i < table.children.length; i++) {
                     checkBoxChanged(table.children[i], !!mainCheckBox.checked);
@@ -128,31 +140,17 @@ async function newNotificationsCheckUp() {
 function createNewNotificationItem(notificationInfo) {
     const notificationsPopup = document.querySelector(".notifications-popup");
 
-    const newNotificationItem = document.createElement("div");
-    newNotificationItem.classList.add("notification-item");
-    newNotificationItem.dataset.content = "./resources/pages/messages.html";
-    newNotificationItem.ariaLabel = "Open notification";
-    newNotificationItem.tabIndex = 0;
+    notificationsPopup.innerHTML += `
+        <div class="notification-item" data-content="./resources/pages/messages.html" aria-label="Open notification" tabindex="0">
+            <i class="fa-solid fa-user icon_size avatar"></i>
+            <div class="notification-content">
+                <span class="notification-user-name">${notificationInfo.userName}</span>
+                <p class="notification-message">${notificationInfo.message}</p>
+            </div>
+        </div>
+    `
 
-    const i = document.createElement("i");
-    i.classList.add("fa-solid", "fa-user", "icon_size", "avatar");
-    newNotificationItem.append(i);
-
-    const notificationContent = document.createElement("div");
-    notificationContent.classList.add("notification-content");
-
-    const span = document.createElement("span");
-    span.classList.add("notification-user-name");
-    span.innerText = notificationInfo.userName;
-    notificationContent.append(span);
-
-    const p = document.createElement("p");
-    p.classList.add("notification-message");
-    p.innerText = notificationInfo.message;
-    notificationContent.append(p);
-
-    newNotificationItem.append(notificationContent);
-
+    const newNotificationItem = notificationsPopup.querySelector(".notification-item");
     newNotificationItem.addEventListener("click", function() {
         delete_all_active(navbar);
         const url = newNotificationItem.dataset.content;
