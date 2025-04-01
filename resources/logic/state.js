@@ -6,7 +6,7 @@ var state = {
         {id: 3, group: "PZ-21", firstName: "Yura", lastName: "Kozenko", birthday: "2005-11-03", gender: "Male", status: "Offline"},
         {id: 4, group: "PZ-24", firstName: "Svyatik", lastName:"Dosyak", birthday: "2006-06-05", gender: "Male", status: "online"},
         {id: 5, group: "PZ-24", firstName: "Dima", lastName:"Kalinichenko", birthday: "2006-08-01", gender: "Male", status: "Offline"},
-        {id: 6, group: "PZ-21", firstName: "Vlad", lastName:"Andriievskyi", birthday: "2006-04-18", gender: "Male", status: "Online"},
+        {id: 6, group: "PZ-21", firstName: "Vlad'", lastName:"Andriievskyi", birthday: "2006-04-18", gender: "Male", status: "Online"},
     ],
     profileInfo: {
 

@@ -237,7 +237,7 @@ function edit_student_submit(student, e) {
     // Update table row
     const studentRow = $(`tr[id="${student.id}"]`);
     studentRow.find("td:nth-child(2)").text(student.group);
-    studentRow.find("td:nth-child(3)").text(student.name);
+    studentRow.find("td:nth-child(3)").text(student.firstName + " " + student.lastName);
     studentRow.find("td:nth-child(4)").text(student.gender);
     studentRow.find("td:nth-child(5)").text(student.birthday);
 
@@ -302,12 +302,13 @@ function validateForm({ group, firstName, lastName, birthday, gender }) {
     }
 
     // Validate first name
-    let regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ\s]+$/;
+    let regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ'\s]+$/;
     if (!firstName) {
         $("#first-name-error").text("First name is required.");
         $("#first-name").css("border-color", "red");
         isValid = false;
-    } else if (!regex.test(firstName)) {
+    }
+    else if (!regex.test(firstName)) {
         $("#first-name-error").text("Only letters and spaces allowed.");
         $("#first-name").css("border-color", "red");
         isValid = false;
@@ -336,6 +337,11 @@ function validateForm({ group, firstName, lastName, birthday, gender }) {
         const today = new Date();
         if (birthDate >= today) {
             $("#birthday-error").text("Birthday must be in the past.");
+            $("#birthday").css("border-color", "red");
+            isValid = false;
+        }
+        else if (birthDate.getFullYear() <= 1900) {
+            $("#birthday-error").text("Birthday must be after the year 1900.");
             $("#birthday").css("border-color", "red");
             isValid = false;
         }
