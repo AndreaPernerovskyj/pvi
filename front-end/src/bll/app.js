@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 async function loadContent(url)  {
     switch (url) {
-        case "./resources/pages/students.html": {
+        case "./src/ui/components/students.html": {
             loadStudentsPage(url);
             break;
         }
@@ -141,7 +141,7 @@ function createNewNotificationItem(notificationInfo) {
     const notificationsPopup = document.querySelector(".notifications-popup");
 
     notificationsPopup.innerHTML += `
-        <div class="notification-item" data-content="./resources/pages/messages.html" aria-label="Open notification" tabindex="0">
+        <div class="notification-item" data-content="/src/ui/components/messages.html" aria-label="Open notification" tabindex="0">
             <i class="fa-solid fa-user icon_size avatar"></i>
             <div class="notification-content">
                 <span class="notification-user-name">${notificationInfo.userName}</span>

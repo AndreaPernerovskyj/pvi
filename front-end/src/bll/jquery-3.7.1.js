@@ -5946,7 +5946,7 @@ function domManip( collection, args, callback, ignored ) {
 							// Unwrap a CDATA section containing script contents. This shouldn't be
 							// needed as in XML documents they're already not visible when
 							// inspecting element contents and in HTML documents they have no
-							// meaning but we're preserving that logic for backwards compatibility.
+							// meaning but we're preserving that bll for backwards compatibility.
 							// This will be removed completely in 4.0. See gh-4904.
 							DOMEval( node.textContent.replace( rcleanScript, "" ), node, doc );
 						}
@@ -10405,7 +10405,7 @@ jQuery.fn.extend( {
 	// but those exceptions were never presented as a real life use-cases
 	// and might be considered as more preferable results.
 	//
-	// This logic, however, is not guaranteed and can change at any point in the future
+	// This bll, however, is not guaranteed and can change at any point in the future
 	offsetParent: function() {
 		return this.map( function() {
 			var offsetParent = this.offsetParent;

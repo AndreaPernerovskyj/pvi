@@ -303,8 +303,15 @@ function validateForm({ group, firstName, lastName, birthday, gender }) {
 
     // Validate first name
     let regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ'\s]+$/;
+    //let regexBadInput = /\bselect\s*/i;
+    let regexBadInput = /\bselect\b/i;
     if (!firstName) {
         $("#first-name-error").text("First name is required.");
+        $("#first-name").css("border-color", "red");
+        isValid = false;
+    }
+    else if(regexBadInput.test(firstName)) {
+        $("#first-name-error").text("Bad request bro, don't hack my data base!");
         $("#first-name").css("border-color", "red");
         isValid = false;
     }
@@ -320,7 +327,13 @@ function validateForm({ group, firstName, lastName, birthday, gender }) {
         $("#last-name-error").text("Last name is required.");
         $("#last-name").css("border-color", "red");
         isValid = false;
-    } else if (!regex.test(lastName)) {
+    }
+    else if(regexBadInput.test(lastName)) {
+        $("#last-name-error").text("Bad request bro, don't hack data base!");
+        $("#last-name").css("border-color", "red");
+        isValid = false;
+    }
+    else if (!regex.test(lastName)) {
         $("#last-name-error").text("Only letters and spaces allowed.");
         $("#last-name").css("border-color", "red");
         isValid = false;

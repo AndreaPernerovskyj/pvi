@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="resources/styles/index.css" rel="stylesheet">
-    <link href="./resources/styles/navbar.css" rel="stylesheet">
-    <link href="./resources/styles/header.css" rel="stylesheet">
-    <link href="./resources/styles/common.css" rel="stylesheet">
-    <link href="./resources/styles/main.css" rel="stylesheet">
-    <link href="./resources/styles/students.css" rel="stylesheet">
-    <link href="resources/styles/responsive.css" rel="stylesheet">
-    <link rel="manifest" href="./manifest.json">
+    <link href="src/ui/styles/index.css" rel="stylesheet">
+    <link href="src/ui/styles/navbar.css" rel="stylesheet">
+    <link href="src/ui/styles/header.css" rel="stylesheet">
+    <link href="src/ui/styles/common.css" rel="stylesheet">
+    <link href="src/ui/styles/main.css" rel="stylesheet">
+    <link href="src/ui/styles/students.css" rel="stylesheet">
+    <link href="src/ui/styles/responsive.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMS</title>
-    <link rel="icon" href="./resources/icons/icon-48x48.png">
+    <link rel="icon" href="assets/icons/icon-48x48.png">
 </head>
 <body>
 <div class="root">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="user-name">
-                <div class="user-info" data-content="/resources/pages/profile.html" aria-label="User name" tabindex="0"
+                <div class="user-info" data-content="/src/ui/components/profile.html" aria-label="User name" tabindex="0"
                      aria-haspopup="true">
                     <i class="fa-solid fa-user icon_size"></i>
                     <a href="#" tabindex="-1">Andrea Pernerovskyi</a>
@@ -48,9 +48,9 @@
     </header>
 
     <nav class="navbar">
-        <a href="#" data-content="./resources/pages/dashboard.html">DashBoard</a>
-        <a class="students-navbar active" href="#" data-content="./resources/pages/students.html">Students</a>
-        <a href="#" data-content="./resources/pages/tasks.html">Tasks</a>
+        <a href="#" data-content="./src/ui/components/dashboard.html">DashBoard</a>
+        <a class="students-navbar active" href="#" data-content="./src/ui/components/students.html">Students</a>
+        <a href="#" data-content="./src/ui/components/tasks.html">Tasks</a>
     </nav>
 
     <main class="content">
@@ -58,11 +58,11 @@
     </main>
 </div>
 
-<script src="resources/logic/jquery-3.7.1.js"></script>
+<script src="src/bll/jquery-3.7.1.js"></script>
 
-<script src="resources/logic/app.js"></script>
-<script src="resources/logic/students.js"></script>
-<script src="resources/logic/state.js"></script>
+<script src="src/bll/app.js"></script>
+<script src="src/bll/students.js"></script>
+<script src="src/bll/state.js"></script>
 <script src="https://kit.fontawesome.com/12f39570aa.js" crossorigin="anonymous"></script>
 </body>
 </html>
