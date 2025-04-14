@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="src/ui/styles/index.css" rel="stylesheet">
+    <link href="src/ui/styles/navbar.css" rel="stylesheet">
+    <link href="src/ui/styles/header.css" rel="stylesheet">
+    <link href="src/ui/styles/common.css" rel="stylesheet">
+    <link href="src/ui/styles/main.css" rel="stylesheet">
+    <link href="src/ui/styles/students.css" rel="stylesheet">
+    <link href="src/ui/styles/responsive.css" rel="stylesheet">
+    <link href="src/ui/styles/login-signup.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS</title>
+    <link rel="icon" href="assets/icons/icon-48x48.png">
+</head>
+<body>
+<div class="root">
+    <header class="header">
+        <div class="header-title">
+            <h1 id="header-title" tabindex="0" aria-label="Website title"
+                data-content="./src/ui/components/students.html">CMS</h1>
+        </div>
+
+        <div class="header-user-related">
+            <div class="bell-notifications">
+                <div tabindex="0" aria-label="New notifications" aria-haspopup="true" role="button">
+                    <i class="fa-regular fa-bell icon_size" id="notification-bell"></i>
+                </div>
+                <div class="" id="notification-bell-dot"></div>
+
+                <div class="notifications-popup" tabindex="0" aria-label="Notification list">
+                </div>
+            </div>
+            <div class="user-name">
+                <div class="user-info" data-content="/src/ui/components/profile.html" aria-label="User name" tabindex="0"
+                     aria-haspopup="true">
+                    <i class="fa-solid fa-user icon_size"></i>
+                    <a href="#" tabindex="-1">Andrea Pernerovskyi</a>
+                </div>
+
+                <div class="user-popup" tabindex="0" aria-label="User popup">
+                    <button aria-label="Go to profile page">Profile</button>
+                    <button aria-label="Log out from the website" onclick="handleLogout()">Log out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="#" data-content="./src/ui/components/dashboard.html">DashBoard</a>
+        <a class="students-navbar" href="#" data-content="./src/ui/components/students.html">Students</a>
+        <a href="#" data-content="./src/ui/components/tasks.html">Tasks</a>
+    </nav>
+
+    <main class="content">
+    </main>
+
+    <div class="popup-message"></div>
+</div>
+
+<script src="src/bll/jquery-3.7.1.js"></script>
+
+<script src="src/bll/app.js"></script>
+<script src="src/bll/initial.js"></script>
+<script src="src/bll/students.js"></script>
+<script src="src/bll/login.js"></script>
+<script src="src/bll/helpers.js"></script>
+<script src="src/bll/state.js"></script>
+
+<script src="src/dal/studentapi.js"></script>
+<script src="src/dal/authapi.js"></script>
+
+<script src="https://kit.fontawesome.com/12f39570aa.js" crossorigin="anonymous"></script>
+</body>
+</html>

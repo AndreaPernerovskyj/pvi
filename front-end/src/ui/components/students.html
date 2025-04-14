@@ -1,0 +1,115 @@
+<div class="students-page">
+    <div class="students-intro">
+        <div class="students-title">
+            <h1 tabindex="0">Students</h1>
+        </div>
+
+        <div class="students-main-button">
+            <button type="button" class="delete-selected-btn" title="Delete selected students">Delete selected</button>
+
+            <button type="button" class="add-students-btn" title="Add student">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="table-container" tabindex="0" title="Students table info">
+        <table class="students-table">
+            <tbody class="students-table-body">
+            <tr>
+                <th aria-label="Checkbox table header"><input type="checkbox" class="main-checkbox" title="Select all students"></th>
+                <th>Group</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <button class="pagination-btn prev" disabled title="Previous page">&laquo; Prev</button>
+        <div class="pagination-pages">
+        </div>
+        <button class="pagination-btn next" title="Next page">Next &raquo;</button>
+    </div>
+
+    <div class="add-student-modal-container" tabindex="0">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="add-edit-modal-header" tabindex="0">Add Students</h3>
+
+                <button class="modal-exit-btn" title="Close add student modal">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <form class="create-student-form">
+                <span class="error-message" id="serverside-error"></span>
+                <div>
+                    <input type="hidden" id="student-id" name="student-id">
+                </div>
+
+                <div>
+                <label for="group">Group:</label>
+                <select id="group" name="group" required>
+                    <option value="PZ-21">PZ-21</option>
+                    <option value="PZ-22">PZ-22</option>
+                    <option value="PZ-23">PZ-23</option>
+                    <option value="PZ-24">PZ-24</option>
+                    <option value="PZ-25">PZ-25</option>
+                    <option value="PZ-26">PZ-26</option>
+                </select>
+                <span class="error-message" id="group-error"></span>
+                </div>
+
+                <div>
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="first-name">
+                    <span class="error-message" id="first-name-error"></span>
+                </div>
+
+                <div>
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="last-name">
+                    <span class="error-message" id="last-name-error"></span>
+                </div>
+
+                <div>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span class="error-message" id="gender-error"></span>
+                </div>
+
+                <div>
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" id="birthday" name="birthday">
+                    <span class="error-message" id="birthday-error"></span>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" class="modal-close-btn" title="Close student form">Ok</button>
+                    <button type="submit" class="submit-modal-form-btn" title="Submit student form">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="should-delete-student-modal">
+        <div class="modal">
+            <input type="hidden" id="delete-student-id" name="delete-student-id">
+            <button class="modal-exit-delete-btn" title="Close delete confirmation">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+
+            <div class="should-delete-text" tabindex="0"></div>
+            <button class="should-delete-yes" title="Confirm delete">Yes</button>
+            <button class="should-delete-no" title="Cancel delete">No</button>
+        </div>
+    </div>
+</div>

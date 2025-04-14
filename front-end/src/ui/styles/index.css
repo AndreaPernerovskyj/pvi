@@ -1,0 +1,68 @@
+*, body, html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.root {
+    display: grid;
+    grid-template-areas:
+        "h h"
+        "n m";
+    grid-template-columns: 1fr 7fr;
+    grid-template-rows: 1fr 10fr;
+    gap: 10px;
+    height: 100%;
+    padding: 10px;
+}
+
+.navbar {
+    grid-area: n;
+    background: #f7f7f7;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    grid-area: m;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* === Popup message to interact with user more === */
+.popup-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out, visibility 0s linear 0.3s;
+    z-index: 9999;
+
+    max-width: 80%;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.popup-message.error {
+    background-color: #f44336;
+}
+
+.popup-message.show {
+    opacity: 1;
+    bottom: 30px;
+    visibility: visible; /* Show it */
+    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out, visibility 0s;
+}

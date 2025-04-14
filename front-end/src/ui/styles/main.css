@@ -1,0 +1,19 @@
+.content  * {
+    width: auto;
+    height: auto;
+}
+
+.content {
+    padding: 30px;
+}
+
+.content .not-authorized-message {
+    color: #ff4d4f;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    background-color: #fff5f5;
+    border: 1px solid #ffcccc;
+    border-radius: 12px;
+    margin-top: 30px;
+}
