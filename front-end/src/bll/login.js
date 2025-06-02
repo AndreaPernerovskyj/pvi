@@ -14,11 +14,11 @@ async function handleLogin() {
             password: data.get("current-password")
         }
 
-        await authApi.login(obj)
+        await authdal.login(obj)
             .then(async data => {
                 isAuth = true;
-
-                const expirationTime = Date.now() + 15 * 60 * 1000;  // 15 minutes from now
+                state.profileInfo = {...data.student};
+                const expirationTime = Date.now() + 60 * 60 * 1000;  // 15 minutes from now
                 localStorage.setItem('authData', JSON.stringify({
                     identifier: obj.identifier,
                     password: obj.password,
@@ -72,6 +72,6 @@ function cleanUpPassword() {
     document.querySelector("#login-serverside-error").innerText = "";
 }
 
-function handleSignUp() {
-    loadContent("/src/ui/components/signup.html");
+async function handleSignUp() {
+    await loadContent("/src/ui/components/signup.html");
 }

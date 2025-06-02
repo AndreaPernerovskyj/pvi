@@ -68,7 +68,6 @@ self.addEventListener("fetch", (event) => {
     );
 });
 
-
 self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {

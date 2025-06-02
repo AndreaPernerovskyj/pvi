@@ -47,6 +47,42 @@ class StudentModel
         return $students;
     }
 
+    public function getStudentsInitials($offset) {
+        $query = "SELECT id, firstName, lastName FROM students LIMIT $offset, 5";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $students = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $students[] = $row;
+        }
+
+        return $students;
+    }
+
+    public function searchStudentsInitials($fullNamePart) {
+        $searchTerm = $fullNamePart . '%';
+
+        $sql = "SELECT id, firstName, lastName FROM students 
+        WHERE LOWER(firstName) LIKE LOWER(?) 
+           OR LOWER(lastName) LIKE LOWER(?)";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bind_param("ss", $searchTerm, $searchTerm);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $students = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $students[] = $row;
+        }
+
+        return $students;
+    }
+
+
     public function getStudentById($id) {
         $sql = "SELECT * FROM students WHERE id = $id";
         return $this->connection->query($sql)->fetch_assoc();
@@ -77,9 +113,12 @@ class StudentModel
         $stmt->bind_param("sss", $firstName, $lastName, $birthday);
         $stmt->execute();
 
+        $id = null;
+        $stmt->bind_result($id);
+
         if ($stmt->fetch()) {
             $stmt->close();
-            return true; // або true
+            return $id;
         } else {
             $stmt->close();
             return false;

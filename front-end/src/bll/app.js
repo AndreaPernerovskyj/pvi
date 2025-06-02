@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                 password: authData.password
             };
 
-            await authApi.login(data)
+            await authdal.login(data)
                 .then(async data => {
                     isAuth = true;
+                    state.profileInfo = {...data.student};
                     showPopup("Welcome back!", true);
                     await initializeApplication({ username: authData.identifier });
                 })

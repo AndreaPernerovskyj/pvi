@@ -1,5 +1,5 @@
 
-let authApi = {
+let authdal = {
     login(data) {
         return fetch("http://localhost/project/back-end/login", {
             method: 'POST',

@@ -17,4 +17,11 @@ class AuthenticationModel
 
         return $result->fetch_assoc();
     }
+
+    public function login($id) {
+        $status = "online";
+        $stmt = $this->connection->prepare("UPDATE students SET status = ? WHERE id = ?");
+        $stmt->bind_param("si", $status, $id);
+        return $stmt->execute();
+    }
 }

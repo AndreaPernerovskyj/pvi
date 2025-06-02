@@ -51,6 +51,8 @@ class AuthenticationController
             return;
         }
 
+        $this->authModel->login($student['id']);
+
         echo json_encode([
             "success" => true,
             "student" => [

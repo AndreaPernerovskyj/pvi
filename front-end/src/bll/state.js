@@ -1,4 +1,4 @@
-var state = {
+let state = {
     studentsPagination: null,
     students: [
           ],
@@ -6,14 +6,20 @@ var state = {
 
     },
     notifications: [
-        // {id: 0, userName:"Freddie Mercury", message:"Another one bites to dust"},
-        // {id: 1, userName:"Brian May", message:"I don't know actually"},
-        // {id: 2, userName:"Sofia Lesko", message:"How are you?"},
-    ]
+    ],
+    messagesPage: {
+        chatRooms: [
+        ],
+        selectedMembers: [],
+        messageInputText: "",
+        currentChatRoom: null
+    },
+    socket: null
 };
 
 // Constants
 let initialTotalPages = 0;
 let numberOfChecked = 0
+let currentPage = 1;
 
 this.window.state = state;

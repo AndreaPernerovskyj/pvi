@@ -10,6 +10,8 @@
     <link href="src/ui/styles/students.css" rel="stylesheet">
     <link href="src/ui/styles/responsive.css" rel="stylesheet">
     <link href="src/ui/styles/login-signup.css" rel="stylesheet">
+    <link href="src/ui/styles/tasks.css" rel="stylesheet">
+    <link href="src/ui/styles/messages.css" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMS</title>
@@ -51,7 +53,8 @@
     <nav class="navbar">
         <a href="#" data-content="./src/ui/components/dashboard.html">DashBoard</a>
         <a class="students-navbar" href="#" data-content="./src/ui/components/students.html">Students</a>
-        <a href="#" data-content="./src/ui/components/tasks.html">Tasks</a>
+        <a class="tasks-navbar" href="#" data-content="./src/ui/components/tasks.html">Tasks</a>
+        <a class="messages-navbar" href="#" data-content="./src/ui/components/messages.html">Messages</a>
     </nav>
 
     <main class="content">
@@ -65,13 +68,17 @@
 <script src="src/bll/app.js"></script>
 <script src="src/bll/initial.js"></script>
 <script src="src/bll/students.js"></script>
+<script src="src/bll/tasks.js"></script>
+<script src="src/bll/messages.js"></script>
 <script src="src/bll/login.js"></script>
 <script src="src/bll/helpers.js"></script>
 <script src="src/bll/state.js"></script>
 
-<script src="src/dal/studentapi.js"></script>
-<script src="src/dal/authapi.js"></script>
+<script src="src/dal/studentdal.js"></script>
+<script src="src/dal/authdal.js"></script>
+<script src="src/dal/taskdal.js"></script>
 
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script src="https://kit.fontawesome.com/12f39570aa.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,1 +1,71 @@
-<h1>Messages</h1>
+<div class="chat-container">
+    <h1 class="message-h1">Messages</h1>
+
+    <div class="chat-wrapper">
+        <div class="chat-sidebar">
+            <div class="sidebar-header">
+                <h3>Chat room</h3>
+                <button class="new-chat-btn">+ New chat room</button>
+            </div>
+
+            <div class="chat-rooms">
+                <!-- Chat rooms will be listed here -->
+            </div>
+        </div>
+
+        <!-- Main chat area -->
+        <div class="chat-main">
+            <h1>Select a chat room</h1>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="newChatModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Create New Chat Room</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="newChatForm">
+                <div class="form-group">
+                    <label for="chatName">Chat Room Name</label>
+                    <input type="text" id="chatName" class="form-control" placeholder="Enter a name for your chat room"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="chatDescription">Description (Optional)</label>
+                    <input type="text" id="chatDescription" class="form-control"
+                           placeholder="What's this chat room about?">
+                </div>
+
+                <button type="button" class="add-members-chat-create-btn">Add members</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+            <button class="btn btn-create" id="createChatBtn">Create Chat Room</button>
+        </div>
+    </div>
+</div>
+
+<div class="select-members-modal-overlay modal-overlay" id="selectMembersModal">
+    <div class="add-members-modal">
+        <label for="memberSearch">Add Members</label>
+        <div class="member-search-container">
+            <input type="text" id="memberSearch" class="form-control" placeholder="Search for users to add...">
+            <div class="search-results" id="searchResults">
+            </div>
+        </div>
+
+        <div class="selected-members-container">
+            <label class="selected-members-label">Selected Members</label>
+            <div class="selected-members" id="selectedMembers">
+            </div>
+        </div>
+
+        <button class="btn members-btn-ok">Ok</button>
+    </div>
+</div>

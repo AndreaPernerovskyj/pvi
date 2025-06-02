@@ -1,11 +1,10 @@
 // Initial page loading
-
 function loadStudentsPage(url) {
     fetch(url)
         .then((response) => response.text())
         .then((html) => {
             content.innerHTML = html;
-            loadStudentsTable(1);
+            loadStudentsTable(currentPage);
             document.querySelector(".add-students-btn").addEventListener("click", (e) => {
                 e.preventDefault();
                 addStudentsModal();
@@ -17,7 +16,6 @@ function loadStudentsPage(url) {
             });
             const mainCheckBox = document.querySelector(".main-checkbox");
             mainCheckBox.addEventListener("change", (e) => {
-                numberOfChecked=0;
                 const table = e.target.closest("tbody");
                 for (let i = 1; i < table.children.length; i++) {
                     checkBoxChanged(table.children[i], !!mainCheckBox.checked);
@@ -27,14 +25,14 @@ function loadStudentsPage(url) {
                 deleteSelectedStudents();
             })
 
-            initiatePagination(1);
+            initiatePagination(currentPage);
         })
         .catch((error) => console.error("Error loading students.html:", error));
 }
 
 function loadStudentsTable(page) {
     numberOfChecked = 0;
-    studentApi.getStudents(page)
+    studentdal.getStudents(page)
         .then(data => {
             const tableBody = document.querySelector(".students-table-body");
             while (tableBody.rows.length > 1) {
@@ -52,23 +50,25 @@ function loadStudentsTable(page) {
 }
 
 // Pagination
-
 function initiatePagination(current) {
+    document.querySelector(".pagination-pages").innerHTML="";
     fetch("http://localhost/project/back-end/students/pagination").then(response => {
         return response.json();
     }).then(data => {
         state.studentsPagination = {...data};
         const prevButton = document.querySelector(".prev");
         const nextButton = document.querySelector(".next");
+        prevButton.disabled = currentPage <= 1;
+        nextButton.disabled = currentPage === initialTotalPages;
 
         prevButton.addEventListener("click", (e) => {
             const active = document.querySelector(".pagination-btn.active")
-            moveToNextPagePagination(active.previousElementSibling, Number(active.id)-1, prevButton, nextButton);
+            moveToNextPagePagination(active.previousElementSibling, --currentPage, prevButton, nextButton);
         })
 
         nextButton.addEventListener("click", e => {
             const active = document.querySelector(".pagination-btn.active")
-            moveToNextPagePagination(active.nextElementSibling, Number(active.id)+1, prevButton, nextButton);
+            moveToNextPagePagination(active.nextElementSibling, ++currentPage, prevButton, nextButton);
         })
 
         const paginationPages = document.querySelector(".pagination-pages");
@@ -81,7 +81,8 @@ function initiatePagination(current) {
             button.id = String(i);
             button.innerText = String(i);
             button.addEventListener("click", e => {
-                moveToNextPagePagination(button, i, prevButton, nextButton);
+                currentPage = i;
+                moveToNextPagePagination(button, currentPage, prevButton, nextButton);
             })
 
             paginationPages.append(button);
@@ -106,22 +107,18 @@ function moveToNextPagePagination(button, i, prevButton, nextButton) {
 function checkIsCurrentTotalPagesLess() {
     let currentTotalPages = Math.ceil(state.studentsPagination.totalCount / state.studentsPagination.pageSize);
 
-    const paginationPages = document.querySelector(".pagination-btn.active");
-    let curPage = Number(paginationPages.id)
-
     if(currentTotalPages < initialTotalPages) {
-        document.querySelector(".pagination-pages").innerHTML="";
-        if(curPage === initialTotalPages) {
-            loadStudentsTable(curPage-1)
-            initiatePagination(curPage-1);
+        if(currentPage === initialTotalPages) {
+            loadStudentsTable(--currentPage)
+            initiatePagination(currentPage);
         }
         else {
-            loadStudentsTable(Number(curPage));
-            initiatePagination(curPage);
+            loadStudentsTable(Number(currentPage));
+            initiatePagination(currentPage);
         }
     }
     else {
-        loadStudentsTable(Number(curPage));
+        loadStudentsTable(currentPage);
     }
 }
 
@@ -174,7 +171,7 @@ function createStudent(e) {
         groupname: studentDataValidation.groupname,
         gender: studentDataValidation.gender,
     };
-    studentApi.addStudent(newStudentData)
+    studentdal.addStudent(newStudentData)
         .then(async response => {
             const data = await response.json();
 
@@ -185,8 +182,14 @@ function createStudent(e) {
             return data;
         })
         .then(data => {
-            createNewRow(data.student);
-            state.students.push(data.student)
+            if(state.students.length == state.studentsPagination.pageSize) {
+                loadStudentsTable(++currentPage)
+                initiatePagination(currentPage);
+            }
+            else {
+                createNewRow(data.student);
+                state.students.push(data.student)
+            }
             createStudentForm.reset();
             $(".add-student-modal-container").removeClass("show");
             showPopup("Successfully added a new student", true);
@@ -281,7 +284,7 @@ function deleteStudent(shouldDeleteModal, e, id) {
     const td_element = e.target.closest("tr");
     td_element.remove();
 
-    studentApi.deleteById(id)
+    studentdal.deleteById(id)
         .then(response => {
             if (response.ok) {
                 state.students = state.students.filter(student => student.id !== id);
@@ -310,7 +313,7 @@ async function deleteSelectedStudents() {
         const tr_element = table.children[i];
         if (!tr_element.querySelector(".student-checkbox").checked) continue;
 
-        const deletePromise = studentApi.deleteById(tr_element.id)
+        const deletePromise = studentdal.deleteById(tr_element.id)
             .then((response) => {
                 if (response.ok) {
                     tr_element.remove();
@@ -359,16 +362,15 @@ function edit_student_modal(event) {
         edit_student_submit(student, e);
     });
 
-    // Modal close button handler
     $(".modal-close-btn").off("click").on("click", e => {
         const isEmpty = createStudentForm.find("input").toArray().slice(1).some(input => !input.value.trim());
-        createStudentForm.off("submit").on("submit", createStudent);
 
         if (!isEmpty) {
             edit_student_submit(student, e);
             return;
         }
 
+        createStudentForm.off("submit").on("submit", createStudent);
         createStudentForm[0].reset();
         cleanValidation();
         $(".add-student-modal-container").removeClass("show");
@@ -399,19 +401,13 @@ function edit_student_submit(student, e) {
 
     if (!validateForm(studentData)) return;
 
-    student.firstName = studentData.firstName;
-    student.lastName = studentData.lastName;
-    student.groupname = studentData.groupname;
-    student.gender = studentData.gender;
-    student.birthday = studentData.birthday;
-
     fetch(`http://localhost/project/back-end/students?id=${student.id}`,
         {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(student)
+            body: JSON.stringify(studentData)
         })
         .then(async response => {
             const data = await response.json();
@@ -424,6 +420,13 @@ function edit_student_submit(student, e) {
     })
         .then(data => {
             createStudentForm.reset();
+
+            student.firstName = studentData.firstName;
+            student.lastName = studentData.lastName;
+            student.groupname = studentData.groupname;
+            student.gender = studentData.gender;
+            student.birthday = studentData.birthday;
+
             $(".add-student-modal-container").removeClass("show");
             const studentRow = $(`tr[id="${student.id}"]`);
             studentRow.find("td:nth-child(2)").text(student.groupname);
@@ -431,7 +434,7 @@ function edit_student_submit(student, e) {
             studentRow.find("td:nth-child(4)").text(student.gender);
             studentRow.find("td:nth-child(5)").text(student.birthday);
 
-            createStudentForm.off("submit").on("submit", create_student);
+            createStudentForm.off("submit").on("submit", createStudent);
         })
         .catch(error => {
             validateServerSideErrors(error);
@@ -584,6 +587,7 @@ function cleanValidation() {
     const birthdayError = $("#birthday-error");
     const birthday = $("#birthday");
 
+    document.getElementById("serverside-error").innerText="";
     firstNameError.text("");
     firstName.css("border-color", "#cccccc");
     firstNameError.text("");

@@ -19,6 +19,18 @@ class StudentController
         echo json_encode($students);
     }
 
+    public function getStudentsInitials($offset) {
+        $students = $this->studentsModel->getStudentsInitials($offset);
+        header('Content-Type: application/json');
+        echo json_encode($students);
+    }
+
+    public function searchStudentsInitials($fullName) {
+        $students = $this->studentsModel->searchStudentsInitials($fullName);
+        header('Content-Type: application/json');
+        echo json_encode($students);
+    }
+
     public function getStudentById($id)
     {
         $student = $this->studentsModel->getStudentById($id);
@@ -48,16 +60,16 @@ class StudentController
 
     // ===== UPDATING A STUDENT ======
     public function updateStudent($id, $data) {
-        if(!$this->validateUserInput($data)) {
+        if(!$this->validateUserInput($data, true, $id)) {
             return;
         }
 
-        $newStudent = $this->studentsModel->updateStudent($id, $data);
+        $updatedStudent = $this->studentsModel->updateStudent($id, $data);
 
-        if ($newStudent) {
+        if ($updatedStudent) {
             http_response_code(201);
             echo json_encode([
-                "student" => $newStudent
+                "student" => $updatedStudent
             ]);
         } else {
             http_response_code(404);
@@ -66,7 +78,7 @@ class StudentController
     }
 
     // ===== VALIDATING USER INPUT ======
-    private function validateUserInput($data) {
+    private function validateUserInput($data, $onUpdate = false, $id = null) {
         $errors = [];
 
         $required = ['firstName', 'lastName', 'birthday', 'groupname', 'gender'];
@@ -106,12 +118,23 @@ class StudentController
             $data['birthday']
         );
 
-        if ($existingStudent) {
-            http_response_code(409);
-            echo json_encode(["errors" => [
-                "duplicate" => "Student with this name and birthday already exists"
-            ]]);
-            return false;
+        if($onUpdate) {
+            if($existingStudent && $existingStudent != $id) {
+                http_response_code(409);
+                echo json_encode(["errors" => [
+                    "duplicate" => "Student with this name and birthday already exists"
+                ]]);
+                return false;
+            }
+        }
+        else {
+            if ($existingStudent) {
+                http_response_code(409);
+                echo json_encode(["errors" => [
+                    "duplicate" => "Student with this name and birthday already exists"
+                ]]);
+                return false;
+            }
         }
 
         return $data;
@@ -130,6 +153,7 @@ class StudentController
         }
     }
 
+    // ===== GETTING PAGINATION INFO =====
     public function getPaginationInfo() {
         $result = $this->studentsModel->getPaginationInfo();
         header('Content-Type: application/json');

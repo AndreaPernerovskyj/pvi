@@ -1,5 +1,5 @@
 
-const studentApi = {
+const studentdal = {
     baseURL: "http://localhost/project/back-end/students",
 
     async getStudents(page = 1) {

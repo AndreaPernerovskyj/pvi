@@ -1,4 +1,6 @@
 RewriteEngine On
 RewriteRule ^students$ /project/back-end/index.php [L]
 RewriteRule ^students/pagination$ /project/back-end/index.php [L]
+RewriteRule ^students/initials$ /project/back-end/index.php [L]
 RewriteRule ^login$ /project/back-end/index.php [L]
+RewriteRule ^tasks$ /project/back-end/index.php [L]

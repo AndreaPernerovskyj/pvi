@@ -1,0 +1,32 @@
+{
+  "name": "cms_client",
+  "version": "1.0.0",
+  "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
+  "main": "server.js",
+  "scripts": {
+    "node": "nodemon server.js",
+    "client": "live-server ./../front-end --port=5500 --host=localhost",
+    "start": "concurrently \"npm run node\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreaPernerovskyj/pvi.git"
+  },
+  "author": "Andrea Pernerovskyi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "*",
+    "mongodb": "^6.16.0",
+    "socket.io": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/AndreaPernerovskyj/pvi/issues"
+  },
+  "homepage": "https://github.com/AndreaPernerovskyj/pvi#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.10"
+  }
+}
